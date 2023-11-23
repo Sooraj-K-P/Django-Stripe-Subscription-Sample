@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+  <br><br><br>
+  <a href='/send_invoice'>Download Invoice </a>
+  <br><br><br>
+
+  <a href='/modify'>Update your subscription to premium </a>
+  <br><br><br>
+
+  <a href='/downgrade'>Downgrade your subscription </a>
+  <br><br><br>
+
+  <a href='/deletesub'>Do you want to delete subscription</a>
+  <br><br><br>
+  <a href='/pause'>Pause your payment</a>
+  <br><br><br>
+  <a href='/unpause'>Resume - your payment</a>
+
+  <a href='/upgrade'>upgrade your subscription to premium</a>
+  {% if cancel_at_period_end %}
+  Your membership will run to the end of your billing cycle.
+  <a href='/pause'>Pause your payment</a>
+
+  <br><br><br>
+
+  {% elif membership %}
+  <form action="{% url 'settings' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Cancel_Membership?">
+  </form>
+  {% else %}
+  <a href="{% url 'join' %}">Get a membership</a>
+  {% endif %}
+</div>
+
+{% endblock %}
